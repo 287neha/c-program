@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct student
+{
+ int rn;
+ char name[50];
+};
+int number()
+{
+ int n;
+ printf("enter the number of students: ");
+ scanf("%d",&n);
+ return n;
+}
+void input(int n,struct student s[n],int *type)
+{
+ for(int i=0;i<n;i++)
+ {
+  printf("enter the name of the student %d: ",i+1);                                          
+  scanf("%s",s[i].name);                                                                           
+  printf("enter the roll number: ");
+  scanf("%d",&s[i].rn);
+ }
+ printf("choose way of sorting\n 1:roll number\n 2:name\n");
+ scanf("%d",type);
+}
+int comp_rn(const void* a,const void* b)
+{
+ struct student *ia=(struct student*)a;
+ struct student *ib=(struct student*)b;
+ return (ia->rn-ib->rn);
+}
+int comp_name(const void* p,const void* q)
+{
+ struct student *ip=(struct student*)p;
+ struct student *iq=(struct student*)q;
+ return strcmp(ip->name,iq->name);
+}
+void compute(int n,struct student s[n],int type)
+{
+ switch(type)
+ {
+  case 1:
+  qsort(s,n,sizeof(struct student),comp_rn);
+  break;
+  case 2:
+  qsort(s,n,sizeof(struct student),comp_name);
+  break;
+ }
+}
+void output(int n,struct student s[n])
+{
+ printf("the sorted string is");
+ for(int i=0;i<n;i++)
+ {
+  printf("%s-%d\n",s[i].name,s[i].rn);
+ }
+}
+int main()
+{
+ int n;
+ n=number();
+ struct student s[n];
+ int type;
+ input(n,s,&type);
+ compute(n,s,type);
+ output(n,s);
+ return 0;
+}
+
+ 
