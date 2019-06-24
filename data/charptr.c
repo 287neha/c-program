@@ -33,5 +33,9 @@ int main()
  string(n,s);
  qsort(s,n,sizeof(char*),compare);
  output(n,s);
+ for(int i=0;i<n;i++)
+ {
+  free(s[i]);
+ }
  return 0;
 }
