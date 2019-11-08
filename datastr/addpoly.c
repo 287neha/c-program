@@ -6,12 +6,14 @@ typedef struct nodes
  int exp;
  struct nodes *next;
 }node;
-void allocate(int c,int e)
+node *allocate(int c,int e)
 {
  node *newnode;
+ newnode=(node *)malloc(sizeof(node));
  newnode->coef=c;
  newnode->exp=e;
  newnode->next=0;
+ return newnode;
 }
 node *create(node *tail)
 {
@@ -21,7 +23,7 @@ node *create(node *tail)
  {
  printf("enter the coefficient and exponent\n");
  scanf("%d  %d",&a,&b);
- allocate(a,b);
+ newnode=allocate(a,b);
  if(tail==0)
  {
   tail=newnode;
@@ -108,6 +110,7 @@ int main()
  t1=create(t1);
  t2=create(t2);
  t3=addpoly(t1,t2,t3);
+ display(t3);
  return 0;
 }
  
